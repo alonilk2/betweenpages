@@ -2,6 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
+import { Components } from 'react-markdown';
 import {
   getReviewBySlug,
   getAllReviews,
@@ -77,6 +82,84 @@ export default function ReviewPage({ params }: ReviewPageProps) {
       month: 'long',
       day: 'numeric',
     });
+  };
+
+  // Custom components for ReactMarkdown with Hebrew RTL support
+  const markdownComponents: Components = {
+    h1: ({ children }) => (
+      <h1 className="text-3xl md:text-4xl font-bold text-ink leading-tight mb-6 mt-8">
+        {children}
+      </h1>
+    ),
+    h2: ({ children }) => (
+      <h2 className="text-2xl md:text-3xl font-semibold text-ink leading-tight mb-4 mt-6">
+        {children}
+      </h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="text-xl md:text-2xl font-semibold text-ink leading-tight mb-3 mt-5">
+        {children}
+      </h3>
+    ),
+    p: ({ children }) => (
+      <p className="text-lg leading-relaxed text-ink/90 mb-4 max-w-prose">
+        {children}
+      </p>
+    ),
+    a: ({ href, children }) => {
+      // Internal links
+      if (href?.startsWith('/') || href?.startsWith('#')) {
+        return (
+          <Link
+            href={href}
+            className="text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+          >
+            {children}
+          </Link>
+        );
+      }
+      // External links
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+        >
+          {children}
+        </a>
+      );
+    },
+    blockquote: ({ children }) => (
+      <blockquote className="border-r-4 border-primary/30 pr-6 py-4 my-6 italic text-lg text-ink/80 bg-sepia/30 rounded-r-lg">
+        {children}
+      </blockquote>
+    ),
+    ul: ({ children }) => (
+      <ul className="list-disc list-inside space-y-2 mb-4 text-lg text-ink/90 mr-6">
+        {children}
+      </ul>
+    ),
+    ol: ({ children }) => (
+      <ol className="list-decimal list-inside space-y-2 mb-4 text-lg text-ink/90 mr-6">
+        {children}
+      </ol>
+    ),
+    li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+    strong: ({ children }) => (
+      <strong className="font-bold text-ink">{children}</strong>
+    ),
+    em: ({ children }) => <em className="italic text-ink/90">{children}</em>,
+    code: ({ children }) => (
+      <code className="bg-sepia/50 px-2 py-1 rounded text-sm font-mono text-ink">
+        {children}
+      </code>
+    ),
+    pre: ({ children }) => (
+      <pre className="bg-sepia/30 p-4 rounded-lg overflow-x-auto my-6 text-sm">
+        {children}
+      </pre>
+    ),
   };
 
   return (
@@ -269,8 +352,14 @@ export default function ReviewPage({ params }: ReviewPageProps) {
 
         {/* Review Content */}
         <div className="prose prose-lg prose-gray max-w-none font-reading">
-          <div className="text-ink leading-relaxed whitespace-pre-line">
-            {review.content}
+          <div className="text-ink leading-relaxed" dir="rtl">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeHighlight, rehypeRaw]}
+              components={markdownComponents}
+            >
+              {review.content}
+            </ReactMarkdown>
           </div>
         </div>
 

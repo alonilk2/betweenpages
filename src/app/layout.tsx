@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Assistant, Cardo } from 'next/font/google';
+import { Assistant, Libertinus_Serif } from 'next/font/google';
 import { Layout } from '../../components';
 import './globals.css';
 
@@ -9,9 +9,9 @@ const assistant = Assistant({
   display: 'swap',
 });
 
-const cardo = Cardo({
+const libertinusSerif = Libertinus_Serif({
   variable: '--font-reading',
-  subsets: ['latin', 'greek'],
+  subsets: ['latin'],
   weight: ['400', '700'],
   display: 'swap',
 });
@@ -31,7 +31,9 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="light" />
       </head>
-      <body className={`${assistant.variable} ${cardo.variable} antialiased`}>
+      <body
+        className={`${assistant.variable} ${libertinusSerif.variable} antialiased`}
+      >
         <Layout>{children}</Layout>
       </body>
     </html>
