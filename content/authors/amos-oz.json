@@ -1,0 +1,13 @@
+{
+  "slug": "amos-oz",
+  "name": "עמוס עוז",
+  "originalName": "Amos Oz",
+  "bio": "סופר ישראלי, פעיל שלום ומן המשפיעים בספרות הישראלית המודרנית. זוכה פרסים רבים בארץ ובעולם.",
+  "birthYear": 1939,
+  "deathYear": 2018,
+  "nationality": "ישראלית",
+  "books": ["sippur-al-ahava-vehoshech", "menuha-nehona"],
+  "awards": ["פרס ישראל לספרות", "פרס גתה", "פרס הספרות של האיחוד האירופי"],
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

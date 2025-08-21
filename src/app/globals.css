@@ -1,0 +1,427 @@
+@import 'tailwindcss';
+
+/* Brand Colors - extracted from actual logo */
+:root {
+  /* Logo Colors */
+  --coral-50: #fef7f6;
+  --coral-100: #fdeae7;
+  --coral-200: #fbd5cf;
+  --coral-300: #f7b5aa;
+  --coral-400: #f18b7e;
+  --coral-500: #e8725e; /* Primary coral from logo */
+  --coral-600: #d55a47;
+  --coral-700: #b44837;
+  --coral-800: #963d33;
+  --coral-900: #7d3730;
+
+  --lavender-50: #f7f6f9;
+  --lavender-100: #f0eef4;
+  --lavender-200: #e3dfe9;
+  --lavender-300: #d0c7d8;
+  --lavender-400: #b8a8c2;
+  --lavender-500: #9d8aab; /* Secondary lavender from logo */
+  --lavender-600: #8a7096;
+  --lavender-700: #745c7d;
+  --lavender-800: #634f69;
+  --lavender-900: #544358;
+
+  --sage-50: #f6f7f6;
+  --sage-100: #e9ebe9;
+  --sage-200: #d4d7d3;
+  --sage-300: #b2b9b0;
+  --sage-400: #8a9487;
+  --sage-500: #6b7569; /* Accent sage from logo spine */
+  --sage-600: #565e54;
+  --sage-700: #484e46;
+  --sage-800: #3c403b;
+  --sage-900: #343732;
+
+  --cream-50: #fdfcfb;
+  --cream-100: #faf8f5;
+  --cream-200: #f4f0ea; /* Background cream from logo */
+  --cream-300: #ece5db;
+  --cream-400: #dfd4c5;
+  --cream-500: #d1c2ae;
+  --cream-600: #b8a48e;
+  --cream-700: #9a8373;
+  --cream-800: #7e6b60;
+  --cream-900: #685950;
+
+  /* Semantic Colors - Light Mode */
+  --ink: #343732; /* Deep sage for main text */
+  --ink-light: #685950; /* Warm brown for secondary text */
+  --paper: #fcf6ea; /* Updated creamy background */
+  --sepia: #f4f0ea; /* Cream background from logo */
+  --sepia-dark: #ece5db; /* Darker cream variant */
+  --border: #d4d7d3; /* Soft sage for borders */
+  --border-focus: var(--coral-500); /* Coral for focus states */
+
+  /* Primary brand colors from logo */
+  --primary: var(--coral-500); /* Coral as primary */
+  --secondary: var(--lavender-500); /* Lavender as secondary */
+  --accent: var(--sage-500); /* Sage as accent */
+
+  /* Status Colors */
+  --success: #6b7569; /* Sage for success */
+  --warning: #e8725e; /* Coral for warnings */
+  --error: #d55a47; /* Darker coral for errors */
+  --info: #9d8aab; /* Lavender for info */
+
+  /* Typography Scale - Increased by ~25% */
+  --text-xs: 0.9375rem; /* 15px - was 12px */
+  --text-sm: 1.0625rem; /* 17px - was 14px */
+  --text-base: 1.25rem; /* 20px - was 16px */
+  --text-lg: 1.4375rem; /* 23px - was 18px */
+  --text-xl: 1.5625rem; /* 25px - was 20px */
+  --text-2xl: 1.875rem; /* 30px - was 24px */
+  --text-3xl: 2.375rem; /* 38px - was 30px */
+  --text-4xl: 2.8125rem; /* 45px - was 36px */
+  --text-5xl: 3.75rem; /* 60px - was 48px */
+
+  /* Spacing Scale - Increased by ~25% */
+  --space-1: 0.3125rem; /* 5px - was 4px */
+  --space-2: 0.625rem; /* 10px - was 8px */
+  --space-3: 0.9375rem; /* 15px - was 12px */
+  --space-4: 1.25rem; /* 20px - was 16px */
+  --space-6: 1.875rem; /* 30px - was 24px */
+  --space-8: 2.5rem; /* 40px - was 32px */
+  --space-12: 3.75rem; /* 60px - was 48px */
+  --space-16: 5rem; /* 80px - was 64px */
+
+  /* Reading Experience - Increased for better readability */
+  --reading-width: 70ch; /* was 65ch */
+  --reading-line-height: 1.8; /* was 1.7 */
+  --ui-line-height: 1.6; /* was 1.5 */
+}
+
+/* Tailwind will handle color mappings */
+/* Brand colors are defined above in CSS variables */
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Force light mode */
+:root {
+  color-scheme: light !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
+  /* Force light mode */
+  color-scheme: light !important;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    var(--font-ui),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--ui-line-height);
+  /* Better text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent layout shift */
+  min-height: 100vh;
+  /* RTL support */
+  direction: rtl;
+}
+
+/* Typography Classes */
+.font-ui {
+  font-family:
+    var(--font-ui),
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.font-reading {
+  font-family: var(--font-reading), Georgia, 'Times New Roman', serif;
+  line-height: var(--reading-line-height);
+}
+
+/* Heading Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    var(--font-ui),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+}
+h2 {
+  font-size: var(--text-3xl);
+}
+h3 {
+  font-size: var(--text-2xl);
+}
+h4 {
+  font-size: var(--text-xl);
+}
+h5 {
+  font-size: var(--text-lg);
+}
+h6 {
+  font-size: var(--text-base);
+}
+
+/* Reading Content Styles */
+.prose {
+  font-family: var(--font-reading), Georgia, 'Times New Roman', serif;
+  max-width: var(--reading-width);
+  line-height: var(--reading-line-height);
+}
+
+.prose p {
+  margin-bottom: var(--space-4);
+  color: var(--ink);
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Link Styles */
+a {
+  color: var(--coral-600);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--coral-700);
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  font-family:
+    var(--font-ui),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: var(--text-base);
+  border: 1px solid var(--border);
+  border-radius: 0.9375rem; /* Increased from 0.75rem */
+  padding: var(--space-4) var(--space-6); /* Increased padding for larger scale */
+  background: var(--paper);
+  color: var(--ink);
+  transition: all 0.3s ease; /* Smoother transitions */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  min-height: 3rem; /* Minimum height for better touch targets */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow:
+    0 0 0 4px rgba(232, 114, 94, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08); /* Enhanced focus state */
+  transform: translateY(-1px); /* Subtle lift effect */
+}
+
+/* Button Styles */
+.btn {
+  font-family:
+    var(--font-ui),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: var(--text-lg); /* Increased from text-base */
+  font-weight: 500;
+  padding: var(--space-4) var(--space-8); /* Increased padding significantly */
+  border-radius: 2.5rem; /* Increased from 2rem */
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smoother transitions */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3); /* Increased gap */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  position: relative;
+  overflow: hidden;
+  min-height: 3.25rem; /* Minimum height for consistency */
+}
+
+.btn:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.btn:active {
+  transform: translateY(0); /* Return to original position when clicked */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--coral-500),
+    var(--coral-600)
+  ); /* Gradient background */
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--coral-600), var(--coral-700));
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--lavender-50);
+  color: var(--lavender-700);
+  border: 1px solid var(--lavender-200);
+}
+
+.btn-secondary:hover {
+  background: var(--lavender-100);
+  border-color: var(--lavender-300);
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Styles for Keyboard Navigation */
+*:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #000000;
+    --ink: #000000;
+    --paper: #ffffff;
+  }
+}
+
+/* Search Highlight Styles */
+.search-highlight {
+  background: var(--coral-200);
+  color: var(--coral-900);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.5rem; /* More rounded */
+  font-weight: 600;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Modern Card Styles */
+.card {
+  background: var(--paper);
+  border-radius: 2rem; /* Increased from 1.5rem */
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); /* Soft shadow */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth easing */
+  overflow: hidden;
+  padding: var(--space-6); /* Added default padding */
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary);
+}
+
+/* Modern Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem; /* Increased from 0.375rem 0.75rem */
+  border-radius: 2.5rem; /* Increased from 2rem */
+  font-size: var(--text-base); /* Increased from text-sm */
+  font-weight: 500;
+  background: var(--sepia);
+  color: var(--ink-light);
+  transition: all 0.2s ease;
+  min-height: 2.25rem; /* Added minimum height */
+}
+
+.badge-primary {
+  background: linear-gradient(135deg, var(--coral-100), var(--coral-200));
+  color: var(--coral-700);
+}
+
+.badge-secondary {
+  background: linear-gradient(135deg, var(--lavender-100), var(--lavender-200));
+  color: var(--lavender-700);
+}
+
+/* Glassmorphism effect for special elements */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1rem;
+}
+
+/* Modern input group */
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  padding-left: 3.75rem; /* Increased from 3rem - space for icon */
+}
+
+.input-group .icon {
+  position: absolute;
+  right: 1.25rem; /* Increased from 1rem */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-light);
+  transition: color 0.2s ease;
+  width: 1.5rem; /* Added explicit size */
+  height: 1.5rem;
+}
+
+.input-group input:focus + .icon {
+  color: var(--primary);
+}

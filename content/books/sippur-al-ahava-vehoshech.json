@@ -1,0 +1,23 @@
+{
+  "slug": "sippur-al-ahava-vehoshech",
+  "title": "סיפור על אהבה וחושך",
+  "originalTitle": "A Tale of Love and Darkness",
+  "authors": ["amos-oz"],
+  "genres": ["literary-fiction", "non-fiction"],
+  "tags": ["ביוגרפיה", "ירושלים", "ילדות", "משפחה"],
+  "publishYear": 2002,
+  "pages": 538,
+  "publisher": "כתר",
+  "language": "Hebrew",
+  "cover": "/images/covers/sippur-al-ahava-vehoshech.svg",
+  "description": "אוטוביוגרפיה מרגשת של עמוס עוז על ילדותו בירושלים, משפחתו ותחילת דרכו כסופר. סיפור אישי המשתזר עם סיפור ההיסטוריה הישראלית.",
+  "quotes": [
+    "כל סיפור הוא סיפור אהבה, וכל סיפור אהבה הוא בסופו של דבר סיפור על אובדן.",
+    "הילדות היא המדינה היחידה שאתה לא יכול לעזוב אותה גם אם אתה רוצה."
+  ],
+  "rating": 4.5,
+  "related": ["menuha-nehona"],
+  "featured": true,
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

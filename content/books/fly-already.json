@@ -1,0 +1,23 @@
+{
+  "slug": "fly-already",
+  "title": "תעוף כבר",
+  "originalTitle": "Fly Already",
+  "authors": ["etgar-keret"],
+  "genres": ["literary-fiction"],
+  "tags": ["סיפורים קצרים", "הומור שחור", "משפחה", "יחסים"],
+  "publishYear": 2018,
+  "pages": 256,
+  "publisher": "כנרת זמורה-ביתן",
+  "language": "Hebrew",
+  "cover": "/images/covers/fly-already.svg",
+  "description": "אוסף חדש של סיפורים קצרים המתמודד עם נושאים של משפחה, הורות וחיים במציאות הישראלית.",
+  "quotes": [
+    "האהבה היא הדבר היחיד שבו כמה שיותר אתה נותן, כן יותר יש לך.",
+    "ילדים הם המתרגמים הכי טובים של החיים למבוגרים."
+  ],
+  "rating": 4.4,
+  "related": ["suddenly-a-knock-on-the-door"],
+  "featured": false,
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

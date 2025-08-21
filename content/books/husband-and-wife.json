@@ -1,0 +1,23 @@
+{
+  "slug": "husband-and-wife",
+  "title": "בעל ואישה",
+  "originalTitle": "Husband and Wife",
+  "authors": ["zeruya-shalev"],
+  "genres": ["literary-fiction"],
+  "tags": ["נישואין", "זוגיות", "משבר", "רגשות"],
+  "publishYear": 2000,
+  "pages": 287,
+  "publisher": "כתר",
+  "language": "Hebrew",
+  "cover": "/images/covers/husband-and-wife.svg",
+  "description": "רומן עוצמתי על זוגיות במשבר, החוקר את המורכבות של יחסי נישואין ואת המחיר של אהבה.",
+  "quotes": [
+    "נישואין הם כמו בית - צריך לטפח אותם כל יום מחדש.",
+    "האהבה הכי גדולה יכולה להפוך לכאב הכי עמוק."
+  ],
+  "rating": 4.1,
+  "related": ["thera"],
+  "featured": true,
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

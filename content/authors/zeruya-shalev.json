@@ -1,0 +1,12 @@
+{
+  "slug": "zeruya-shalev",
+  "name": "זרויה שלו",
+  "originalName": "Zeruya Shalev",
+  "bio": "סופרת ישראלית מחשובת, זוכת פרסים רבים. ספריה תורגמו לעשרות שפות.",
+  "birthYear": 1959,
+  "nationality": "ישראלית",
+  "books": ["husband-and-wife", "thera"],
+  "awards": ["פרס ברנשטיין", "פרס קוגל לספרות", "Prix Courrier International"],
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

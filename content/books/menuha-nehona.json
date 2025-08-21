@@ -1,0 +1,23 @@
+{
+  "slug": "menuha-nehona",
+  "title": "מנוחה נכונה",
+  "originalTitle": "A Perfect Peace",
+  "authors": ["amos-oz"],
+  "genres": ["literary-fiction"],
+  "tags": ["קיבוץ", "משפחה", "חברה ישראלית", "דרמה"],
+  "publishYear": 1982,
+  "pages": 369,
+  "publisher": "עם עובד",
+  "language": "Hebrew",
+  "cover": "/images/covers/menuha-nehona.svg",
+  "description": "רומן על החיים בקיבוץ בשנות השמונים, העוסק בדינמיקה המשפחתית והחברתית במשק הקיבוצי.",
+  "quotes": [
+    "השקט הוא לא היעדר רעש, אלא נוכחות של משהו אחר.",
+    "כל אדם נושא בתוכו עיר שלמה של זיכרונות."
+  ],
+  "rating": 4.2,
+  "related": ["sippur-al-ahava-vehoshech"],
+  "featured": false,
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

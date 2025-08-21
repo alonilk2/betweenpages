@@ -1,0 +1,12 @@
+{
+  "slug": "etgar-keret",
+  "name": "אתגר כרת",
+  "originalName": "Etgar Keret",
+  "bio": "כותב סיפורים קצרים, תסריטאי ובמאי. ידוע בסגנון הכתיבה הייחודי שלו המשלב הומור ופנטזיה.",
+  "birthYear": 1967,
+  "nationality": "ישראלית",
+  "books": ["suddenly-a-knock-on-the-door", "fly-already"],
+  "awards": ["פרס ספיר", "פרס שפירא", "World Fantasy Award"],
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}

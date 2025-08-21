@@ -1,0 +1,23 @@
+{
+  "slug": "suddenly-a-knock-on-the-door",
+  "title": "לפתע דפיקה בדלת",
+  "originalTitle": "Suddenly, a Knock on the Door",
+  "authors": ["etgar-keret"],
+  "genres": ["literary-fiction"],
+  "tags": ["סיפורים קצרים", "הומור", "פנטזיה", "חיים מודרניים"],
+  "publishYear": 2010,
+  "pages": 224,
+  "publisher": "עם עובד",
+  "language": "Hebrew",
+  "cover": "/images/covers/suddenly-a-knock-on-the-door.svg",
+  "description": "אוסף סיפורים קצרים מרתקים המשלבים מציאות ופנטזיה באופן ייחודי. כל סיפור הוא עולם קטן בפני עצמו.",
+  "quotes": [
+    "כל סיפור מתחיל במקום שבו מישהו מפסיק להיות מאושר.",
+    "החיים הם כמו סיפור קצר - אי אפשר לדעת איך הם יסתיימו עד שמגיעים לסוף."
+  ],
+  "rating": 4.3,
+  "related": ["fly-already"],
+  "featured": true,
+  "createdAt": "2025-01-15T00:00:00Z",
+  "updatedAt": "2025-01-15T00:00:00Z"
+}
