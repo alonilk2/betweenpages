@@ -30,6 +30,8 @@ export const bookSchema = z.object({
   rating: z.number().min(1).max(5).optional(),
   related: z.array(z.string()).default([]), // Related book slugs
   featured: z.boolean().default(false),
+  // Optional Shopify product handle for purchase integration
+  shopifyHandle: z.string().optional(),
   createdAt: dateSchema,
   updatedAt: dateSchema,
 });

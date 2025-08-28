@@ -8,6 +8,7 @@ import {
   getAuthorBySlug,
   getReviewsByBook,
 } from '../../../../lib/content';
+import { getProductByHandle } from '../../../../lib/shopify';
 import { BookCard, ReviewCard } from '../../../../components';
 
 interface BookPageProps {
@@ -44,7 +45,7 @@ export async function generateMetadata({
   };
 }
 
-export default function BookPage({ params }: BookPageProps) {
+export default async function BookPage({ params }: BookPageProps) {
   const book = getBookBySlug(params.slug);
 
   if (!book) {
@@ -58,6 +59,12 @@ export default function BookPage({ params }: BookPageProps) {
 
   // Get reviews for this book
   const reviews = getReviewsByBook(book.slug);
+
+  // Fetch Shopify product (static during build) if configured
+  let shopifyProduct: Awaited<ReturnType<typeof getProductByHandle>> = null;
+  if (book.shopifyHandle) {
+    shopifyProduct = await getProductByHandle(book.shopifyHandle);
+  }
 
   // Get related books (by same authors or genres)
   const relatedBooks = getAllBooks()
@@ -229,6 +236,51 @@ export default function BookPage({ params }: BookPageProps) {
                 </div>
               )}
             </dl>
+
+            {/* Purchase Section */}
+            {shopifyProduct && shopifyProduct.variants.length > 0 && (
+              <div className="mt-8 p-4 border border-primary/20 rounded-lg bg-primary/5">
+                <h3 className="font-semibold text-ink mb-3">רכישת הספר</h3>
+                <div className="space-y-3">
+                  {shopifyProduct.variants.map((variant) => (
+                    <form
+                      key={variant.id}
+                      action={() => {}}
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const url = `/api/shopify/redirect?variantId=${encodeURIComponent(variant.id)}&q=1`;
+                        window.location.href = url;
+                      }}
+                      className="flex items-center justify-between gap-2"
+                    >
+                      <div className="text-sm">
+                        <span className="font-medium text-ink">
+                          {variant.title}
+                        </span>{' '}
+                        <span className="text-ink-light">₪{variant.price}</span>
+                      </div>
+                      <button
+                        type="submit"
+                        disabled={!variant.availableForSale}
+                        className="px-3 py-1.5 text-xs rounded-md font-medium bg-primary text-white hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed"
+                      >
+                        {variant.availableForSale ? 'קנה עכשיו' : 'אזל במלאי'}
+                      </button>
+                    </form>
+                  ))}
+                  {shopifyProduct.onlineStoreUrl && (
+                    <a
+                      href={shopifyProduct.onlineStoreUrl}
+                      target="_blank"
+                      className="block text-xs text-primary hover:underline text-center"
+                      rel="noopener noreferrer"
+                    >
+                      פתח בחנות המלאה
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Genres & Tags */}
             <div className="mt-6 space-y-4">

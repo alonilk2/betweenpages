@@ -163,7 +163,8 @@ h6 {
     sans-serif;
   font-weight: 700;
   line-height: 1.2;
-  color: var(--ink);
+  /* Allow utility classes (e.g., text-white) to override by not hard-coding a color */
+  color: inherit;
   margin-bottom: var(--space-4);
 }
 

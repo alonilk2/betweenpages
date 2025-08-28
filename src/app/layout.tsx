@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Assistant, Libertinus_Serif } from 'next/font/google';
+import { Assistant, Noto_Serif_Hebrew } from 'next/font/google';
 import { Layout } from '../../components';
 import './globals.css';
 
@@ -9,10 +9,13 @@ const assistant = Assistant({
   display: 'swap',
 });
 
-const libertinusSerif = Libertinus_Serif({
+// Reading font (Hebrew serif). Libertinus Serif is not available on Google Fonts,
+// so we use Noto Serif Hebrew as a close accessible alternative. To self-host
+// Libertinus you can add font files in /public/fonts and reference via CSS.
+const readingSerif = Noto_Serif_Hebrew({
   variable: '--font-reading',
-  subsets: ['latin'],
-  weight: ['400', '700'],
+  subsets: ['hebrew'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
 
@@ -32,7 +35,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="light" />
       </head>
       <body
-        className={`${assistant.variable} ${libertinusSerif.variable} antialiased`}
+        className={`${assistant.variable} ${readingSerif.variable} antialiased`}
       >
         <Layout>{children}</Layout>
       </body>

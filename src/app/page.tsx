@@ -1,5 +1,11 @@
 import Link from 'next/link';
-import { BookCard, ReviewCard } from '../../components';
+import Image from 'next/image';
+// Hero background image (book spines) imported so it can be used in a background style even though it's not in /public
+// If you later move the file to /public/images/hero-books.jpg you can remove the import and use the direct URL.
+// @ts-ignore - Allow importing image asset
+import heroImage from '../../unnamed.png';
+import { BookCard, ReviewCard, ShopProductCard } from '../../components';
+import { getProductByHandle } from '../../lib/shopify';
 import {
   getAllBooks,
   getAllAuthors,
@@ -62,30 +68,63 @@ export default async function Home() {
     .filter((review) => review !== null)
     .sort((a, b) => new Date(b!.date).getTime() - new Date(a!.date).getTime())
     .slice(0, 2);
+  // Build list of books that have a Shopify handle and fetch product data (limit 3)
+  const shopEnabledBooks = allBooks.filter((b) => b.shopifyHandle).slice(0, 3);
+  const shopProducts = await Promise.all(
+    shopEnabledBooks.map(async (b) => {
+      if (!b.shopifyHandle) return null;
+      const p = await getProductByHandle(b.shopifyHandle);
+      if (!p) return null;
+      const firstVariant = p.variants[0];
+      return {
+        handle: p.handle,
+        title: b.title,
+        price: firstVariant ? firstVariant.price : '—',
+        image: p.featuredImage
+          ? { url: p.featuredImage.url, alt: b.title }
+          : undefined,
+        available: firstVariant?.availableForSale,
+        buyUrl: firstVariant
+          ? `/api/shopify/redirect?variantId=${encodeURIComponent(firstVariant.id)}&q=1`
+          : null,
+      };
+    })
+  );
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-sepia to-paper py-20 md:py-32">
-        {' '}
-        {/* Increased padding */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero Section with background image */}
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        {/* Background image layer */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src={heroImage as any}
+            alt=""
+            fill
+            priority
+            className="object-cover object-center blur-sm md:blur md:scale-[1.03]"
+          />
+        </div>
+        {/* Overlay gradient for readability */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/50"
+          aria-hidden="true"
+        />
+        {/* Subtle warm tint to keep brand feel while retaining contrast */}
+        <div
+          className="absolute inset-0 bg-sepia/10 mix-blend-overlay"
+          aria-hidden="true"
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
-            {' '}
-            {/* Increased max width */}
-            <h1 className="text-5xl md:text-6xl font-bold text-ink mb-8">
-              {' '}
-              {/* Increased font sizes and margin */}
+            <h1 className="text-5xl md:text-6xl font-bold !text-white drop-shadow-lg mb-8">
               ברוכים הבאים לבין הדפים
             </h1>
-            <p className="text-2xl md:text-3xl text-ink-light mb-10 leading-relaxed">
-              {' '}
-              {/* Increased font sizes and margin */}
+            <p className="text-2xl md:text-3xl text-white/90 mb-10 leading-relaxed drop-shadow-md">
               המקום שלכם לגלות ספרים חדשים, לקרוא ביקורות מעמיקות ולהמליץ על
               הקריאות הטובות ביותר
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              {' '}
-              {/* Increased gap */}
               <Link href="/books" className="btn btn-primary">
                 עיינו בספרים
               </Link>
@@ -171,6 +210,84 @@ export default async function Home() {
               <ReviewCard key={review!.slug} {...review} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Shop Section (always visible; placeholder if no products) */}
+      <section className="relative py-24 bg-gradient-to-b from-paper via-sepia/40 to-paper overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(circle_at_center,black,transparent)] opacity-40">
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-coral-500/10 rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+            <div className="max-w-2xl space-y-6">
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-primary to-coral-600 bg-clip-text text-transparent">
+                החנות שלנו
+              </h2>
+              <p className="text-xl text-ink-light leading-relaxed">
+                ספרים נבחרים לרכישה מיידית דרך הפלטפורמה שלנו. תמכו ביצירה
+                ספרותית והעמיקו את הספרייה האישית שלכם.
+              </p>
+            </div>
+            <div>
+              <Link
+                href="/books"
+                className="inline-flex items-center gap-2 rounded-xl border border-primary/30 bg-primary/5 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 focus:ring-offset-paper transition"
+              >
+                לכל הספרים
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </Link>
+            </div>
+          </div>
+          {shopProducts.filter(Boolean).length > 0 ? (
+            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              {shopProducts.filter(Boolean).map((p) => (
+                <ShopProductCard key={p!.handle} {...p!} />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-12 text-center max-w-4xl mx-auto">
+              <p className="text-xl font-medium text-ink mb-4">
+                החנות עדיין בהכנה
+              </p>
+              <p className="text-ink-light mb-8">
+                בקרוב תוכלו לרכוש כאן ספרים ישירות. בינתיים אפשר לעיין בקטלוג
+                המלא.
+              </p>
+              <Link
+                href="/books"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-coral-600 px-8 py-4 text-sm font-medium text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 focus:ring-offset-paper transition"
+              >
+                עיינו בקטלוג
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 
